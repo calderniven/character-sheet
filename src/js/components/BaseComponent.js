@@ -20,7 +20,7 @@ export class BaseComponent {
 
             let component = new this(element);
 
-            window.components.push(component);
+            window.app.components.push(component);
         }
     }
 
