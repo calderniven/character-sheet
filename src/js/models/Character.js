@@ -16,4 +16,11 @@ export class Character {
             wits        : 1,
         }
     }
+
+    static active() {
+        let index = window.app.player.characters.active;
+        console.log(index);
+        return window.app.player.characters.roster[index];
+
+    }
 }

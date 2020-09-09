@@ -4,8 +4,9 @@ import { $$ } from "../utils/helpers.js";
 
 export class BaseComponent {
 
-    constructor(element) {
+    constructor(element, original) {
         this.element = element;
+        this.attributes = original.attributes;
         this.render();
     }
 
@@ -18,7 +19,7 @@ export class BaseComponent {
             
             match.replaceWith(element);
 
-            let component = new this(element);
+            let component = new this(element, match);
 
             window.app.components.push(component);
         }

@@ -12,7 +12,11 @@ export class CharacterSelect extends BaseComponent {
         let characters = ""
         for (let index = 0; index < characterList.length; index++) {
             const character = characterList[index];
-            characters += `<option value=${index}>${character.name}</option>`
+            let active = "";
+            if (index == window.app.player.characters.active) {
+                active = " selected"
+            }
+            characters += `<option value=${index}${active}>${character.name}</option>`
         }
         
         let element = `<select>${characters}</select>`;
@@ -21,6 +25,10 @@ export class CharacterSelect extends BaseComponent {
         let dropDown = $("select", this.element);
         dropDown.onchange = function(selection) {
             window.app.player.characters.active = Number(selection.target.value);
+            window.app.player.save();
+            for (const component of window.app.components) {
+                component.render();
+            }
         }
 
     }

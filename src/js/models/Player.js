@@ -16,6 +16,10 @@ export class Player {
              */
             roster: [],
         }
+        if (this.characters.roster.length == 0) {
+            this.characters.roster.push(new Character("character name"));
+            this.characters.roster.active = 0
+        }
     }
 
     static load() {
@@ -34,7 +38,7 @@ export class Player {
     static loadFromObject(object) {
         let player = new Player(object.name);
         player.characters.active = object.characters.active;
-        //roster = player.characters.roster
+        
         player.characters.roster = this.loadCharacters(object.characters.roster);
         return player;
     }
