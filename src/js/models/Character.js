@@ -1,5 +1,7 @@
 "use strict";
 
+import { Player } from "./Player.js";
+
 export class Character {
     constructor(name) {
         this.name = name;
@@ -16,11 +18,14 @@ export class Character {
             wits        : 1,
         }
     }
-
+    
+    /**
+     * @returns {Character}
+     */
     static active() {
-        let index = window.app.player.characters.active;
-        console.log(index);
-        return window.app.player.characters.roster[index];
-
+        let player = Player.active();
+        console.log(player);
+        let index = player.characters.activeId;
+        return player.characters.roster[index];
     }
 }

@@ -3,17 +3,19 @@
 import { BaseComponent } from "./BaseComponent.js";
 import { App } from "../utils/App.js";
 import { $ } from "../utils/helpers.js";
+import { Player } from "../models/Player.js";
+import { CharacterStat } from "./CharacterStat.js";
 
 export class CharacterSelect extends BaseComponent {
 
     render() {
-        let player = window.app.player
+        let player = Player.active();
         let characterList = player.characters.roster;
         let characters = ""
         for (let index = 0; index < characterList.length; index++) {
             const character = characterList[index];
             let active = "";
-            if (index == window.app.player.characters.active) {
+            if (index == player.characters.activeId) {
                 active = " selected"
             }
             characters += `<option value=${index}${active}>${character.name}</option>`
@@ -24,10 +26,14 @@ export class CharacterSelect extends BaseComponent {
 
         let dropDown = $("select", this.element);
         dropDown.onchange = function(selection) {
-            window.app.player.characters.active = Number(selection.target.value);
-            window.app.player.save();
+            let player = Player.active();
+            player.characters.activeId = Number(selection.target.value);
+            player.save();
             for (const component of window.app.components) {
-                component.render();
+                if (component instanceof CharacterStat) {
+                     component.render();
+                     console.log("rendered");
+                }
             }
         }
 

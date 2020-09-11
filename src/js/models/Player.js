@@ -9,7 +9,7 @@ export class Player {
             /**
              * @type {Number}
              */
-            active: null,
+            activeId: null,
 
             /**
              * @type {Character[]}
@@ -17,9 +17,16 @@ export class Player {
             roster: [],
         }
         if (this.characters.roster.length == 0) {
-            this.characters.roster.push(new Character("character name"));
-            this.characters.roster.active = 0
+            this.characters.roster.push(new Character("Anonymous"));
+            this.characters.activeId = 0;
         }
+    }
+
+    /**
+     * @returns {Player|null}
+     */
+    static active() {
+        return window.app.player;
     }
 
     static load() {
@@ -37,7 +44,7 @@ export class Player {
 
     static loadFromObject(object) {
         let player = new Player(object.name);
-        player.characters.active = object.characters.active;
+        player.characters.activeId = object.characters.activeId;
         
         player.characters.roster = this.loadCharacters(object.characters.roster);
         return player;

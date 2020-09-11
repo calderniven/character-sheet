@@ -23,8 +23,8 @@ export class App {
 
         window.app = this;
 
-        this.registerComponents();
         this.loadPlayer();
+        this.registerComponents();
     }
 
     loadPlayer() {
