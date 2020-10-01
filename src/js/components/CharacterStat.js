@@ -11,6 +11,7 @@ export class CharacterStat extends BaseComponent {
         let character = Character.active();
         let statValue = character.attributes[statName];
         this.element.innerHTML = `<label>${statName}</label> <input data-bind="${statName}" type="number" value=${statValue}>`;
+        this.element.className = "character-stat";
         
         let stat = $("input", this.element);
         stat.onchange = function(event) {
