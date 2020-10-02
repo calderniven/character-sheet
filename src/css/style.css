@@ -5,7 +5,7 @@ body {
 
 .attributes > div {
     display: flex;
-    max-width: 500px;
+    max-width: 350px;
     margin: auto;
 }
 
@@ -23,13 +23,41 @@ body {
     flex-direction: column;
 }
 
-.attributes > div label {
+.character-stat label {
     color: white;
     font-size: 20px;
     text-transform: uppercase;
 }
 
-.attributes > div input {
+.character-stat input {
     max-width: 50px;
-    font-size: 20px;
+    font-size: 24px;
+    -moz-appearance: textfield;
+    text-align: center;
+    padding: 5px;
+    border: none;
+}
+
+.character-stat button {
+    background-color: rgb(255, 200, 50);
+    border: none;
+    padding: 2px;
+}
+
+.character-stat button.plus {
+    border-radius: 3px 3px 0 0;
+}
+
+.character-stat button.minus {
+    border-radius: 0 0 3px 3px;
+}
+
+.character-stat button:hover {
+    background-color: rgb(255, 220, 150);
+}
+
+.character-stat input::-webkit-outer-spin-button,
+.character-stat input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
