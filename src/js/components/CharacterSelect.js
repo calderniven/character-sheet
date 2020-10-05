@@ -20,23 +20,31 @@ export class CharacterSelect extends BaseComponent {
             }
             characters += `<option value=${index}${active}>${character.name}</option>`
         }
-        
+
         let element = `<select>${characters}</select>`;
         this.element.innerHTML = element;
 
-        let dropDown = $("select", this.element);
-        dropDown.onchange = function(selection) {
-            let player = Player.active();
-            player.characters.activeId = Number(selection.target.value);
-            player.save();
-            for (const component of window.app.components) {
-                if (component instanceof CharacterStat) {
-                     component.render();
-                     console.log("rendered");
-                }
-            }
+        $("select", this.element).onchange = function (selection) {
+            CharacterSelect.onCharacterChange(selection);
         }
-
     }
 
+    /**
+     * Fires when new Character is selected via CharacterSelect drop-down
+     * @param {Event} selection 
+     */
+    static onCharacterChange(selection) {
+        let player = Player.active();
+        player.characters.activeId = Number(selection.target.value);
+        player.save();
+        CharacterSelect.rerenderComponents();
+    }
+
+    static rerenderComponents() {
+        for (const component of window.app.components) {
+            if (component instanceof CharacterStat) {
+                component.render();
+            }
+        }
+    }
 }
